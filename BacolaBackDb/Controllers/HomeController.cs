@@ -34,6 +34,7 @@ namespace BacolaBackDb.Controllers
                 .Include(p => p.Category)
                 .Include(p => p.ProductImages)
                 .OrderByDescending(m => m.Id)
+                .Take(20)
                 .ToListAsync();
             List<Category> categories = await _context.Categories
                 .Where(p => p.IsDeleted == false)
@@ -117,8 +118,29 @@ namespace BacolaBackDb.Controllers
             {
                 return NotFound();
             }
+            List<Category> categories = await _context.Categories
+                .Where(p => p.IsDeleted == false)
+                .ToListAsync();
 
-            return View(product);
+            if (Request.Cookies["basket"] != null)
+            {
+                HomeVM homeVM = new HomeVM
+                {
+                    Product = product,
+                    Categories = categories,
+                    BasketVM = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"])
+                };
+                return View(homeVM);
+            }
+            else
+            {
+                HomeVM homeVM = new HomeVM
+                {
+                    Product = product,
+                    Categories = categories,
+                };
+                return View(homeVM);
+            }
         }
     }
 }

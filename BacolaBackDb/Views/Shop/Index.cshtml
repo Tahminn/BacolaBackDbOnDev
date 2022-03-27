@@ -177,7 +177,7 @@
                                 <div class="product-card">
                                   <a href="#">
                                     <div class="product-img">
-                                      <img class="" src="~/assets/img/@item.ProductImages.Where(i=> i.IsMain).FirstOrDefault()">
+                                      <img class="" src="~/assets/img/@item.ProductImages.Where(i=> i.IsMain).FirstOrDefault().Image">
                                     </div>
                                   </a>
                                   <div class="icons-product-info">
@@ -209,7 +209,7 @@
                                 <div class="product-card">
                                   <a href="#">
                                     <div class="product-img">
-                                      <img class="" src="~/assets/img/@item.ProductImages.Where(i=> i.IsMain).FirstOrDefault()">
+                                      <img class="" src="~/assets/img/@item.ProductImages.Where(i=> i.IsMain).FirstOrDefault().Image">
                                     </div>
                                   </a>
                                   <div class="icons-product-info">
@@ -229,7 +229,7 @@
                                   </div>
                                 </div>
                                 <div class="button-add-card" style="z-index: 50; position: absolute">
-                                  <a class="btn btn-warning">Add to cart</a>
+                                  <a asp-controller="Home" asp-action="AddBasket" asp-route-id="@item.Id" class="btn btn-warning">Add to cart</a>
                                 </div>
                               </li>
                              </div>          

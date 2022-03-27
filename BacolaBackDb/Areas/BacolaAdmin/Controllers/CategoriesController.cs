@@ -23,8 +23,8 @@ namespace BacolaBackDb.Areas.BacolaAdmin.Controllers
         // GET: BacolaAdmin/Categories
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Categories.Include(c => c.Parent);
-            return View(await appDbContext.ToListAsync());
+            List<Category> categories = await _context.Categories.Include(c => c.Parent).ToListAsync();
+            return View(categories);
         }
 
         // GET: BacolaAdmin/Categories/Details/5
@@ -60,6 +60,12 @@ namespace BacolaBackDb.Areas.BacolaAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Image,ParentId,Id,IsDeleted")] Category category)
         {
+            bool existProduct = _context.Categories.Any(m => m.Name.ToLower().Trim() == category.Name.ToLower().Trim());
+            if (existProduct)
+            {
+                ModelState.AddModelError("Name", "Bu Movcuddur");
+                return View();
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(category);

@@ -307,14 +307,12 @@
         <div class="container">
             <div class="row">
                 <ul class="d-flex slider-scroll" style="transform: translateX(0); flex-wrap: wrap">
-                    @foreach(var item in Model.Products)
+                    @foreach(var item in Model.Products.Take(10))
                     {
-                        if(item.Id <= 10)
-                        {
                             <div class="coll-2">
                 <li>
                     <div class="product-card">
-                        <a href="#">
+                        <a asp-controller="Home" asp-action="Details" asp-route-id="@item.Id">
                             <div class="product-img">
                                 <img class="" src="~/assets/img/@item.ProductImages.Where(i=> i.IsMain).FirstOrDefault().Image">
                             </div>
@@ -338,10 +336,10 @@
                     <div class="button-add-card"
                          style="z-index: 50; position: absolute">
                         <a asp-controller="Home" asp-action="AddBasket" asp-route-id="@item.Id" class="btn btn-warning">Add to cart</a>
+                        sc
                     </div>
                 </li>
             </div>
-                        }
                     }
                 </ul>
             </div>

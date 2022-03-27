@@ -1,5 +1,6 @@
 ﻿using BacolaBackDb.Models;
 using BacolaBackDb.Models.Home;
+using FiorelloBackDb.Models.Admin;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace BacolaBackDb.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Slider> Sliders { get; set; }
+        public DbSet<Setting> Settings { get; set; }
         #endregion
 
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options){}

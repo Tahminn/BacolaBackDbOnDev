@@ -1,4 +1,5 @@
 using BacolaBackDb.Data;
+using BacolaBackDb.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,7 @@ namespace BacolaBackDb
             {
                 options.UseSqlServer(Configuration.GetConnectionString("BacolaConnection"));
             });
+            services.AddScoped<LayoutService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
